@@ -1,13 +1,8 @@
 from django.shortcuts import render
-from django.http import HttpResponse
-
-
-def calculate():
-    x = 1
-    y = 2
-    return x
+from store.models import Product
 
 
 def say_hello(request):
-    x = calculate()
-    return render(request, 'hello.html', {'name': 'Mosh'})
+    product = Product.objects.filter(unit_price__gte=10).first()
+
+    return render(request, 'hello.html', {'name': 'Fabri', 'product': product})
